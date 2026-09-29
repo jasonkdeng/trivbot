@@ -10,12 +10,14 @@ function createClient() {
   const pool = process.env.GCP_WORKLOAD_IDENTITY_POOL_ID;
   const provider = process.env.GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID;
   if (projectNumber && serviceAccount && pool && provider) {
+    const oidcAudience = process.env.GCP_AUDIENCE;
+    if (!oidcAudience) throw new Error("GCP_AUDIENCE is required for Vercel Workload Identity Federation.");
     const audience = `//iam.googleapis.com/projects/${projectNumber}/locations/global/workloadIdentityPools/${pool}/providers/${provider}`;
     const authClient = ExternalAccountClient.fromJSON({
       type: "external_account", audience, subject_token_type: "urn:ietf:params:oauth:token-type:jwt",
       token_url: "https://sts.googleapis.com/v1/token",
       service_account_impersonation_url: `https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${serviceAccount}:generateAccessToken`,
-      subject_token_supplier: { getSubjectToken: getVercelOidcToken }
+      subject_token_supplier: { getSubjectToken: () => getVercelOidcToken({ audience: oidcAudience }) }
     });
     if (!authClient) throw new Error("Could not initialize Google Workload Identity Federation.");
     return new TextToSpeechClient({ projectId, authClient });
