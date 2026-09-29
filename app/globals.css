@@ -1,0 +1,12 @@
+:root { color-scheme: dark; font-family: Arial, sans-serif; background: #101827; color: #eef4ff; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; }
+main { width: min(720px, 100%); padding: 28px; }
+h1 { margin: 0 0 6px; font-size: 2.2rem; } .sub { color: #aab8d0; margin: 0 0 30px; }
+.card { background: #182337; border: 1px solid #2b3c58; border-radius: 18px; padding: 24px; }
+label { display: block; font-weight: 700; margin-top: 18px; } select, input { width: 100%; margin-top: 8px; } select { padding: 11px; border-radius: 8px; }
+.row { display:flex; align-items:center; gap:12px; } .row input { flex:1; } .row span { min-width: 94px; color:#bed2ff; }
+.question { min-height: 126px; display: grid; place-items: center; text-align: center; font-size: clamp(1.45rem, 4vw, 2.2rem); line-height: 1.35; margin: 26px 0 10px; }
+.answer { text-align:center; color:#7ee4ad; font-size:1.25rem; min-height: 28px; } .status { text-align:center; color:#aab8d0; min-height:24px; }
+.controls { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:25px; } button { border:0; border-radius:10px; padding:13px 22px; font-size:1rem; font-weight:700; cursor:pointer; background:#bed2ff; color:#101827; } button.secondary { background:#2b3c58; color:#eef4ff; } button:disabled { opacity:.5; cursor:not-allowed; }
+.error { margin-top:16px; text-align:center; color:#ffb4b4; } .error button { margin-left:8px; padding:6px 10px; font-size:.85rem; }
